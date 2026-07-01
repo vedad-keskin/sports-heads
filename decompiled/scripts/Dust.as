@@ -27,8 +27,8 @@ package
          ++timer;
          width = 10 + timer / 2;
          height = 10 + timer / 2;
-         alpha = (1 - timer / 10) * 0.6;
-         if(timer > 10)
+         alpha = (1 - timer / Utils.timingFrames(10)) * 0.6;
+         if(timer > Utils.timingFrames(10))
          {
             deleteme = true;
          }

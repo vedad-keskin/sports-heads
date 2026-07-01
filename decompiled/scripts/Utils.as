@@ -13,6 +13,17 @@ package
       
       public static var Root:MovieClip;
       
+      public static const FRAME_SCALE:uint = 2;
+      
+      public static const MOVE_FRICTION:Number = 0.8366600265340754;
+      
+      public static const KICK_FRICTION:Number = 0.894427191;
+      
+      public static function timingFrames(param1:uint) : uint
+      {
+         return param1 * FRAME_SCALE;
+      }
+      
       public function Utils()
       {
          super();

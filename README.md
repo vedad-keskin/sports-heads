@@ -11,6 +11,7 @@ sports-heads/
 ├── original/          # Untouched SWF from the archive
 ├── decompiled/        # FFDec export: scripts, sprites, sounds, images, …
 ├── build/             # Patched SWFs (future edits via FFDec)
+├── remake/            # Godot 4 full remake (smooth FPS, delta-time timers)
 ├── play/              # Launch scripts and browser player
 ├── tools/             # FFDec, Ruffle (local, not committed as zips)
 └── scripts/           # Repeatable export helpers
@@ -30,15 +31,33 @@ play\play.bat
 play\play-patched.bat
 ```
 
-**Patched + 60 fps (~2× faster gameplay):**
+**Patched + 60 fps (60fps_patch1 — timing, right goal, 2P defaults):**
 
 ```bat
 play\play-60fps.bat
 ```
 
-Or double-click `tools\ruffle\ruffle.exe` and open `build\patched_60fps.swf` or `build\patched.swf`.
+Or double-click `tools\ruffle\ruffle.exe` and open `build/60fps_patch1.swf` or `build/patched.swf`.
 
-**Browser (no install):** open `play\index.html` in a browser (uses Ruffle from CDN).
+Build or rebuild 60fps_patch1:
+
+```bat
+scripts\build-60fps.bat
+```
+
+See [patches/002-60fps-timing.md](patches/002-60fps-timing.md) for scaling details.
+
+**Browser (no install):** open `play/index.html` in a browser (uses Ruffle from CDN).
+
+## Godot 4 remake (smooth FPS, full reimplementation)
+
+Open [`remake/project.godot`](remake/project.godot) in Godot 4.3+ and press **F5**, or:
+
+```bat
+godot --path remake
+```
+
+See [`remake/README.md`](remake/README.md) for architecture, controls, and tuning.
 
 ## Decompile / re-export
 

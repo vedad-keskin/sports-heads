@@ -19,9 +19,9 @@ package
       public function Update() : *
       {
          ++timer;
-         width = 16 * (1 - timer / 20);
-         height = 16 * (1 - timer / 20);
-         if(timer >= 20)
+         width = 16 * (1 - timer / Utils.timingFrames(20));
+         height = 16 * (1 - timer / Utils.timingFrames(20));
+         if(timer >= Utils.timingFrames(20))
          {
             deleteme = true;
          }

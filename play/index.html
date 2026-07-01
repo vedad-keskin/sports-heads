@@ -29,16 +29,21 @@
 </head>
 <body>
   <div id="player"></div>
-  <p>Sports Heads Football Championship — local SWF via Ruffle</p>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle@0.3.0/dist/ruffle.js"></script>
+  <p>Sports Heads Football Championship — 60 FPS patched SWF via Ruffle</p>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle/dist/ruffle.js"></script>
   <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      autoplay: "on",
+      unmuteOverlay: "hidden"
+    };
     const container = document.getElementById("player");
     const ruffle = window.RufflePlayer.newest();
     const player = ruffle.createPlayer();
     player.style.width = "100%";
     player.style.height = "100%";
     container.appendChild(player);
-    player.load("../original/sports_heads_football_championship.swf");
+    player.load("../build/60fps_patch1.swf");
   </script>
 </body>
 </html>

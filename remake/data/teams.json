@@ -1,0 +1,22 @@
+[
+  {"id": 1, "name": "Arsenal", "ai_rating": 9, "kit": "sleeves"},
+  {"id": 2, "name": "Aston Villa", "ai_rating": 5, "kit": "sleeves"},
+  {"id": 3, "name": "Blackburn", "ai_rating": 4, "kit": "halves"},
+  {"id": 4, "name": "Bolton", "ai_rating": 4, "kit": "plain"},
+  {"id": 5, "name": "Chelsea", "ai_rating": 10, "kit": "plain"},
+  {"id": 6, "name": "Everton", "ai_rating": 6, "kit": "plain"},
+  {"id": 7, "name": "Fulham", "ai_rating": 6, "kit": "plain"},
+  {"id": 8, "name": "Liverpool", "ai_rating": 8, "kit": "plain"},
+  {"id": 9, "name": "Man City", "ai_rating": 8, "kit": "plain"},
+  {"id": 10, "name": "Man Utd", "ai_rating": 10, "kit": "plain"},
+  {"id": 11, "name": "Newcastle", "ai_rating": 6, "kit": "stripe"},
+  {"id": 12, "name": "Norwich", "ai_rating": 6, "kit": "plain"},
+  {"id": 13, "name": "QPR", "ai_rating": 7, "kit": "hoops"},
+  {"id": 14, "name": "Stoke City", "ai_rating": 4, "kit": "stripe"},
+  {"id": 15, "name": "Sunderland", "ai_rating": 5, "kit": "stripe"},
+  {"id": 16, "name": "Swansea", "ai_rating": 7, "kit": "plain"},
+  {"id": 17, "name": "Tottenham", "ai_rating": 7, "kit": "plain"},
+  {"id": 18, "name": "West Brom", "ai_rating": 3, "kit": "stripe"},
+  {"id": 19, "name": "Wigan", "ai_rating": 3, "kit": "stripe"},
+  {"id": 20, "name": "Wolves", "ai_rating": 3, "kit": "plain"}
+]

@@ -35,7 +35,7 @@ package
       
       public function Update() : *
       {
-         yspeed += 0.2;
+         yspeed += 0.1;
          y += yspeed;
          if(y >= 470)
          {

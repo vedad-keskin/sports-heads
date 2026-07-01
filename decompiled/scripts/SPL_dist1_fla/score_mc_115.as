@@ -36,11 +36,11 @@ package SPL_dist1_fla
       public function Update() : *
       {
          ++timer;
-         if(timer < 100)
+         if(timer < Utils.timingFrames(100))
          {
             y = 160;
             x = 400;
-            alpha = (100 - timer) / 100;
+            alpha = (Utils.timingFrames(100) - timer) / Utils.timingFrames(100);
          }
          else
          {

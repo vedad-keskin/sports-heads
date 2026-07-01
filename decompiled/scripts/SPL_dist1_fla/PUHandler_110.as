@@ -81,63 +81,63 @@ package SPL_dist1_fla
          ++PUSizeTimer;
          ++PUBouncyTimer;
          ++PUStreakerTimer;
-         if(heroPUSpeedTimer == 200)
+         if(heroPUSpeedTimer == Utils.timingFrames(200))
          {
             MovieClip(root).hero.GetUserData().bolt.gotoAndStop(1);
             MovieClip(root).heroPUSpeed = 1;
          }
-         if(heroPUJumpTimer == 200)
+         if(heroPUJumpTimer == Utils.timingFrames(200))
          {
             MovieClip(root).heroPUJump = 1;
          }
-         if(heroPUIceTimer == 200)
+         if(heroPUIceTimer == Utils.timingFrames(200))
          {
             MovieClip(root).hero.GetUserData().base.gotoAndStop(1);
             MovieClip(root).heroPUFreeze = false;
          }
-         if(heroPUBombsTimer == 600)
+         if(heroPUBombsTimer == Utils.timingFrames(600))
          {
             MovieClip(root).heroPUBombs = false;
             resetGoalSizes();
          }
-         if(heroPUSizeTimer == 600)
+         if(heroPUSizeTimer == Utils.timingFrames(600))
          {
             MovieClip(root).makeHeroNormal();
          }
-         if(heroPUBreakTimer == 200)
+         if(heroPUBreakTimer == Utils.timingFrames(200))
          {
             MovieClip(root).heroLegBroken = false;
             MovieClip(root).HERORACKET.gotoAndStop(1);
          }
-         if(oppPUSpeedTimer == 200)
+         if(oppPUSpeedTimer == Utils.timingFrames(200))
          {
             MovieClip(root).opp.GetUserData().bolt.gotoAndStop(1);
             MovieClip(root).oppPUSpeed = 1;
          }
-         if(oppPUJumpTimer == 200)
+         if(oppPUJumpTimer == Utils.timingFrames(200))
          {
             MovieClip(root).oppPUJump = 1;
          }
-         if(oppPUIceTimer == 200)
+         if(oppPUIceTimer == Utils.timingFrames(200))
          {
             MovieClip(root).opp.GetUserData().base.gotoAndStop(1);
             MovieClip(root).oppPUFreeze = false;
          }
-         if(oppPUBombsTimer == 600)
+         if(oppPUBombsTimer == Utils.timingFrames(600))
          {
             MovieClip(root).oppPUBombs = false;
             resetGoalSizes();
          }
-         if(oppPUSizeTimer == 600)
+         if(oppPUSizeTimer == Utils.timingFrames(600))
          {
             MovieClip(root).makeOppNormal();
          }
-         if(oppPUBreakTimer == 400)
+         if(oppPUBreakTimer == Utils.timingFrames(400))
          {
             MovieClip(root).oppLegBroken = false;
             MovieClip(root).OPPRACKET.gotoAndStop(1);
          }
-         if(PUFireTimer == 700)
+         if(PUFireTimer == Utils.timingFrames(700))
          {
             MovieClip(root).PUFire = false;
             if(MovieClip(root).oppBombed)
@@ -151,30 +151,30 @@ package SPL_dist1_fla
             }
             MovieClip(root).heroBombed = false;
          }
-         if(PUSizeTimer == 400)
+         if(PUSizeTimer == Utils.timingFrames(400))
          {
             MovieClip(root).PUSize = 1;
             MovieClip(root).updateBall();
          }
-         if(PUBouncyTimer == 200)
+         if(PUBouncyTimer == Utils.timingFrames(200))
          {
             MovieClip(root).PUBouncy = 1;
             MovieClip(root).updateBall();
          }
-         if(PUStreakerTimer == 1000)
+         if(PUStreakerTimer == Utils.timingFrames(1000))
          {
             MovieClip(root).removeBody(MovieClip(root).streaker);
             MovieClip(root).streakerAlive = false;
          }
-         if(PUFireTimer == 1)
+         if(PUFireTimer == Utils.timingFrames(1))
          {
             MovieClip(root).spawnBomb();
          }
-         if(PUFireTimer == 40)
+         if(PUFireTimer == Utils.timingFrames(40))
          {
             MovieClip(root).spawnBomb();
          }
-         if(PUFireTimer == 80)
+         if(PUFireTimer == Utils.timingFrames(80))
          {
             MovieClip(root).spawnBomb();
          }

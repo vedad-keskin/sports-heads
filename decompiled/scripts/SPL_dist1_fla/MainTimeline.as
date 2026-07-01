@@ -620,7 +620,7 @@ package SPL_dist1_fla
          gravity = new b2Vec2(0,300);
          doSleep = true;
          m_iterations = 48;
-         m_timeStep = 1 / 96;
+         m_timeStep = 1 / 192;
          m_world = new b2World(worldAABB,gravity,doSleep);
          worldScale = 1;
          m_world.SetContactListener(myContactListener);
@@ -667,7 +667,7 @@ package SPL_dist1_fla
          ach9_lastHitValid = false;
          ach10_activated = false;
          ach13_lastHitValid = false;
-         ach17_timer = 100;
+         ach17_timer = Utils.timingFrames(100);
          TwoPlayers = false;
          hairNum = 1;
          faceNum = 1;
@@ -710,7 +710,7 @@ package SPL_dist1_fla
          ach9_lastHitValid = false;
          ach10_activated = false;
          ach13_lastHitValid = false;
-         ach17_timer = 100;
+         ach17_timer = Utils.timingFrames(100);
          TwoPlayers = false;
          hairNum = 1;
          faceNum = 1;
@@ -732,6 +732,10 @@ package SPL_dist1_fla
       {
          choosePlayer.x = 200;
          choosePlayer.y = 170;
+         tpPitch = 8;
+         tpskin1 = 4;
+         tpskin2 = 2;
+         tpGameType = 1;
          choosePlayer.Update();
       }
       
@@ -1187,10 +1191,10 @@ package SPL_dist1_fla
             {
                if(!heroPUFreeze && !heroBombed)
                {
-                  xspeed -= 50 + _loc1_ * 30 + heroPUSpeed * 30;
+                  xspeed -= 25 + _loc1_ * 15 + heroPUSpeed * 15;
                   if(hero.GetPosition().y > 439)
                   {
-                     if(timer % 2 == 0)
+                     if(timer % 4 == 0)
                      {
                         spawnDust(true,true);
                      }
@@ -1202,15 +1206,12 @@ package SPL_dist1_fla
             {
                if(!heroPUFreeze && !heroBombed)
                {
-                  if(hero.GetPosition().x < 720)
+                  xspeed += 25 + _loc2_ * 15 + heroPUSpeed * 15;
+                  if(hero.GetPosition().y > 439)
                   {
-                     xspeed += 50 + _loc2_ * 30 + heroPUSpeed * 30;
-                     if(hero.GetPosition().y > 439)
+                     if(timer % 4 == 0)
                      {
-                        if(timer % 2 == 0)
-                        {
-                           spawnDust(true,false);
-                        }
+                        spawnDust(true,false);
                      }
                   }
                }
@@ -1260,20 +1261,20 @@ package SPL_dist1_fla
                   heroJoint.SetMotorSpeed(-12 * (heroJoint.GetJointAngle() - 0.2 - 1.67));
                }
             }
-            xspeed *= 0.7;
-            hero.SetLinearVelocity(new b2Vec2(xspeed,hero.GetLinearVelocity().y + 5));
+            xspeed *= Utils.MOVE_FRICTION;
+            hero.SetLinearVelocity(new b2Vec2(xspeed,hero.GetLinearVelocity().y + 2.5));
             if(!TwoPlayers)
             {
                ++pointTimer;
-               if(pointTimer < 500)
+               if(pointTimer < Utils.timingFrames(500))
                {
                   oppRightCap = 400;
                }
-               else if(pointTimer < 1000)
+               else if(pointTimer < Utils.timingFrames(1000))
                {
                   oppRightCap = 500;
                }
-               else if(pointTimer < 1500)
+               else if(pointTimer < Utils.timingFrames(1500))
                {
                   oppRightCap = 600;
                }
@@ -1289,10 +1290,10 @@ package SPL_dist1_fla
                {
                   if(!oppPUFreeze && !oppBombed)
                   {
-                     oppxspeed -= (30 + oppPUSpeed * 20) * (1 + AI_levelNum / 20);
+                     oppxspeed -= (15 + oppPUSpeed * 10) * (1 + AI_levelNum / 20);
                      if(opp.GetPosition().y > 439)
                      {
-                        if(timer % 2 == 0)
+                        if(timer % 4 == 0)
                         {
                            spawnDust(false,true);
                         }
@@ -1303,10 +1304,10 @@ package SPL_dist1_fla
                {
                   if(!oppPUFreeze && !oppBombed)
                   {
-                     oppxspeed -= (30 + oppPUSpeed * 20) * (1 + AI_levelNum / 20);
+                     oppxspeed -= (15 + oppPUSpeed * 10) * (1 + AI_levelNum / 20);
                      if(opp.GetPosition().y > 439)
                      {
-                        if(timer % 2 == 0)
+                        if(timer % 4 == 0)
                         {
                            spawnDust(false,true);
                         }
@@ -1317,10 +1318,10 @@ package SPL_dist1_fla
                {
                   if(!oppPUFreeze && !oppBombed)
                   {
-                     oppxspeed += (30 + oppPUSpeed * 20) * (1 + AI_levelNum / 20);
+                     oppxspeed += (15 + oppPUSpeed * 10) * (1 + AI_levelNum / 20);
                      if(opp.GetPosition().y > 439)
                      {
-                        if(timer % 2 == 0)
+                        if(timer % 4 == 0)
                         {
                            spawnDust(false,false);
                         }
@@ -1351,9 +1352,9 @@ package SPL_dist1_fla
                {
                   oppLegLastUp = false;
                }
-               oppxspeed *= 0.7;
-               kickOppXSP *= 0.8;
-               opp.SetLinearVelocity(new b2Vec2(oppxspeed + kickOppXSP,opp.GetLinearVelocity().y + 10));
+               oppxspeed *= Utils.MOVE_FRICTION;
+               kickOppXSP *= Utils.KICK_FRICTION;
+               opp.SetLinearVelocity(new b2Vec2(oppxspeed + kickOppXSP,opp.GetLinearVelocity().y + 5));
             }
             else
             {
@@ -1361,10 +1362,10 @@ package SPL_dist1_fla
                {
                   if(!oppPUFreeze && !oppBombed)
                   {
-                     oppxspeed -= 50 + oppPUSpeed * 30;
+                     oppxspeed -= 25 + oppPUSpeed * 15;
                      if(opp.GetPosition().y > 439)
                      {
-                        if(timer % 2 == 0)
+                        if(timer % 4 == 0)
                         {
                            spawnDust(false,true);
                         }
@@ -1375,15 +1376,12 @@ package SPL_dist1_fla
                {
                   if(!oppPUFreeze && !oppBombed)
                   {
-                     if(opp.GetPosition().x < 720)
+                     oppxspeed += 25 + oppPUSpeed * 15;
+                     if(opp.GetPosition().y > 439)
                      {
-                        oppxspeed += 50 + oppPUSpeed * 30;
-                        if(opp.GetPosition().y > 439)
+                        if(timer % 4 == 0)
                         {
-                           if(timer % 2 == 0)
-                           {
-                              spawnDust(false,false);
-                           }
+                           spawnDust(false,false);
                         }
                      }
                   }
@@ -1419,8 +1417,8 @@ package SPL_dist1_fla
                      oppJoint.SetMotorSpeed(-12 * (oppJoint.GetJointAngle() + Math.PI - 1.2 - Math.PI / 2 + 1.67));
                   }
                }
-               oppxspeed *= 0.7;
-               opp.SetLinearVelocity(new b2Vec2(oppxspeed,opp.GetLinearVelocity().y + 5));
+               oppxspeed *= Utils.MOVE_FRICTION;
+               opp.SetLinearVelocity(new b2Vec2(oppxspeed,opp.GetLinearVelocity().y + 2.5));
             }
             --ach17_timer;
             if(opp.GetPosition().x < 120 && ach17_timer > 0)
@@ -1435,11 +1433,11 @@ package SPL_dist1_fla
                }
                else if(streaker.GetPosition().x < streakerX)
                {
-                  streaker.SetLinearVelocity(new b2Vec2(100,streaker.GetLinearVelocity().y));
+                  streaker.SetLinearVelocity(new b2Vec2(50,streaker.GetLinearVelocity().y));
                }
                else
                {
-                  streaker.SetLinearVelocity(new b2Vec2(-100,streaker.GetLinearVelocity().y));
+                  streaker.SetLinearVelocity(new b2Vec2(-50,streaker.GetLinearVelocity().y));
                }
                if(streaker.GetPosition().y > 439)
                {
@@ -1448,27 +1446,27 @@ package SPL_dist1_fla
             }
             if(ball.GetUserData() != null && Boolean(ball.GetUserData().hitTestObject(top1Hit)))
             {
-               ball.AddToLinearVelocity(2,0);
+               ball.AddToLinearVelocity(1,0);
             }
             else if(ball.GetUserData() != null && Boolean(ball.GetUserData().hitTestObject(top2Hit)))
             {
-               ball.AddToLinearVelocity(-2,0);
+               ball.AddToLinearVelocity(-1,0);
             }
             ++ach4_saveTimer;
             if(!TwoPlayers)
             {
-               if(ach4_saveTimer == 100)
+               if(ach4_saveTimer == Utils.timingFrames(100))
                {
                   achAward.Award(4);
                }
             }
             ++timer;
-            if(timer % 2 == 0)
+            if(timer % 4 == 0)
             {
                spawnTrail();
             }
             ++PUTimer;
-            if(PUTimer > 200)
+            if(PUTimer > Utils.timingFrames(200))
             {
                spawnPU();
                PUTimer = 0;
@@ -1526,7 +1524,7 @@ package SPL_dist1_fla
                if(timeMode)
                {
                   ++timeLeftBitch;
-                  if(timeLeftBitch >= 30)
+                  if(timeLeftBitch >= Utils.timingFrames(30))
                   {
                      --timeLeft;
                      timeLeftBitch = 0;
@@ -1596,9 +1594,9 @@ package SPL_dist1_fla
          body = B2DManager.spawnBoxBody("body",560,-20,520,60,0,0.5,0,0,new InvisBlock());
          body.SetXForm(body.GetPosition(),8 * Math.PI / 180);
          leftGoalPost = B2DManager.spawnBoxBody("body",40,345,80,10,0,0.5,0,0,new InvisBlock());
-         leftGoalPost.SetXForm(body.GetPosition(),0);
+         leftGoalPost.SetXForm(new b2Vec2(40,345),0);
          rightGoalPost = B2DManager.spawnBoxBody("body",760,345,80,10,0,0.5,0,0,new InvisBlock());
-         rightGoalPost.SetXForm(body.GetPosition(),0);
+         rightGoalPost.SetXForm(new b2Vec2(760,345),0);
          ground = B2DManager.spawnBoxBody("body",400,470,800,20,0,0.5,0,-1,new GroundBlock());
          ball = B2DManager.spawnCircleBody("body",400,230,10,1.5,1,0.6,0,new Ball());
          ball.SetLinearVelocity(new b2Vec2(-150 + Math.random() * 300,-100));
@@ -1825,7 +1823,7 @@ package SPL_dist1_fla
          }
          _loc1_.x = 220 + Math.random() * 360;
          _loc1_.y = 150 + Math.random() * 270;
-         _loc1_.timer = 600;
+         _loc1_.timer = Utils.timingFrames(600);
          _loc1_.deleteme = false;
          myPUs.addItems(_loc1_);
          addChild(_loc1_);
@@ -2514,7 +2512,7 @@ package SPL_dist1_fla
          {
             if(!TwoPlayers && racket.GetAngle() < 6 && racket.GetAngle() > 4.75 && key.isDown(Keyboard.SPACE))
             {
-               ach17_timer = 100;
+               ach17_timer = Utils.timingFrames(100);
                kickOppXSP = -600;
                opp.SetLinearVelocity(new b2Vec2(opp.GetLinearVelocity().x,opp.GetLinearVelocity().y - 60));
             }
@@ -2578,7 +2576,6 @@ package SPL_dist1_fla
       
       internal function frame1() : *
       {
-         stage.frameRate = 60;
          key = new KeyPoll(this.stage);
          Utils.init(this);
          Utils.ChangeRightClickMenu();
@@ -2591,7 +2588,7 @@ package SPL_dist1_fla
          teamChosen = false;
          round = 1;
          nextOpponent = 2;
-         tpGameType = 0;
+         tpGameType = 1;
          tpPitch = 2;
          tpGameTypeList = ["timed","first to seven","golden gun"];
          specialsHeadList = ["Holland","Portugal","France \'98","France \'70","Brazil \'98","Italy \'82","France \'90","Argentina","Brazil \'70"];
@@ -2600,7 +2597,7 @@ package SPL_dist1_fla
          upgradeList = [[0,0,0,0,0,0,0],[750,500,500,500,1000,500,0],["jump","rush","backtrack","kick","special","goal","bear"],[3,3,3,3,3,1,1]];
          upgradePoints = 0;
          upgradeLOCK = false;
-         SPECIAL_HEADS = false;
+         SPECIAL_HEADS = true;
          BEAR_HEAD = false;
          resetLeagueData();
          fixture_list = new Array();
@@ -2732,7 +2729,7 @@ package SPL_dist1_fla
          BEAR_HEAD = mySharedObject.data.BEAR_HEAD;
          round = mySharedObject.data.round;
          frameName = "menu";
-         SPECIAL_HEADS = ach12;
+         SPECIAL_HEADS = true;
          bgTitle.groundBg.gotoAndStop(3);
          Utils.makeHighestDepth(cover);
          if(savedGameAvailable && round < fixture_list.length)

@@ -18,7 +18,7 @@ package
       {
          super();
          Root = param1;
-         frms = param2;
+         frms = Utils.timingFrames(param2);
          funct = param3;
          timer = 0;
          Root.addEventListener(Event.ENTER_FRAME,onFrame);

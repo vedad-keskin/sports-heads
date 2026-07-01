@@ -152,19 +152,15 @@ package SPL_dist1_fla
          tpRight.addEventListener(MouseEvent.MOUSE_UP,tpRightHit);
          tpGtBut.addEventListener(MouseEvent.MOUSE_UP,tpGtButHit);
          specialsBut.addEventListener(MouseEvent.MOUSE_UP,specialsButHit);
-         MovieClip(root).tpPitch = 2 + JMath.getRand(18);
-         MovieClip(root).tpskin1 = 1 + JMath.getRand(19);
-         MovieClip(root).tpskin2 = 1 + JMath.getRand(19);
-         specialText.text = String("");
+         MovieClip(root).SPECIAL_HEADS = true;
          headLimit = MovieClip(root).teamList.length;
+         specialText.text = String("");
          if(MovieClip(root).SPECIAL_HEADS)
          {
-            headLimit = 28;
+            headLimit = 30;
             specialText.text = String("** CLASSIC PLAYERS UNLOCKED **");
-            MovieClip(root).tpskin2 = 20 + JMath.getRand(6);
          }
          Update();
       }
    }
 }
-

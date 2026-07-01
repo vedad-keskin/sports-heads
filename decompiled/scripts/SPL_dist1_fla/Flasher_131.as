@@ -34,7 +34,7 @@ package SPL_dist1_fla
       public function Update() : *
       {
          ++timer;
-         if(timer < 6 || timer > 12 && timer < 18)
+         if(timer < Utils.timingFrames(6) || timer > Utils.timingFrames(12) && timer < Utils.timingFrames(18))
          {
             y = 5;
          }

@@ -34,7 +34,7 @@ package SPL_dist1_fla
       public function onFrame(param1:Event) : void
       {
          ++timer;
-         if(timer < 200)
+         if(timer < Utils.timingFrames(200))
          {
             alpha = 1;
             x = 10;
@@ -46,9 +46,9 @@ package SPL_dist1_fla
             x = -1000;
             y = -1000;
          }
-         if(timer > 100 && timer < 200)
+         if(timer > Utils.timingFrames(100) && timer < Utils.timingFrames(200))
          {
-            alpha = 1 - (timer - 100) / 100;
+            alpha = 1 - (timer - Utils.timingFrames(100)) / Utils.timingFrames(100);
          }
       }
       
