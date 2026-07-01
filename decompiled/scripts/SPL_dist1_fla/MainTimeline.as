@@ -2578,6 +2578,7 @@ package SPL_dist1_fla
       
       internal function frame1() : *
       {
+         stage.frameRate = 60;
          key = new KeyPoll(this.stage);
          Utils.init(this);
          Utils.ChangeRightClickMenu();

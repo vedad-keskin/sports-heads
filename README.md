@@ -30,7 +30,13 @@ play\play.bat
 play\play-patched.bat
 ```
 
-Or double-click `tools\ruffle\ruffle.exe` and open `build\patched.swf`.
+**Patched + 60 fps (~2× faster gameplay):**
+
+```bat
+play\play-60fps.bat
+```
+
+Or double-click `tools\ruffle\ruffle.exe` and open `build\patched_60fps.swf` or `build\patched.swf`.
 
 **Browser (no install):** open `play\index.html` in a browser (uses Ruffle from CDN).
 
