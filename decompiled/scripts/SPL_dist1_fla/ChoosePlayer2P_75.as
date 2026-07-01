@@ -57,6 +57,8 @@ package SPL_dist1_fla
       
       public static const BEAR_HEAD_FRAME:int = 30;
       
+      public static const RIBERY_HEAD_FRAME:int = 31;
+      
       public function ChoosePlayer2P_75()
       {
          super();
@@ -103,7 +105,7 @@ package SPL_dist1_fla
       
       public function normalizeHeadSkin(param1:int) : int
       {
-         if(param1 == BEAR_HEAD_FRAME)
+         if(param1 == BEAR_HEAD_FRAME || param1 == RIBERY_HEAD_FRAME)
          {
             return param1;
          }
@@ -121,13 +123,17 @@ package SPL_dist1_fla
       public function prevHeadSkin(param1:int) : int
       {
          param1 = normalizeHeadSkin(param1);
+         if(param1 == RIBERY_HEAD_FRAME)
+         {
+            return BEAR_HEAD_FRAME;
+         }
          if(param1 == BEAR_HEAD_FRAME)
          {
             return CLASSIC_HEAD_LAST;
          }
          if(param1 <= 1)
          {
-            return BEAR_HEAD_FRAME;
+            return RIBERY_HEAD_FRAME;
          }
          return param1 - 1;
       }
@@ -140,6 +146,10 @@ package SPL_dist1_fla
             return BEAR_HEAD_FRAME;
          }
          if(param1 == BEAR_HEAD_FRAME)
+         {
+            return RIBERY_HEAD_FRAME;
+         }
+         if(param1 == RIBERY_HEAD_FRAME)
          {
             return 1;
          }
@@ -192,7 +202,7 @@ package SPL_dist1_fla
          tpGtBut.addEventListener(MouseEvent.MOUSE_UP,tpGtButHit);
          specialsBut.addEventListener(MouseEvent.MOUSE_UP,specialsButHit);
          MovieClip(root).SPECIAL_HEADS = true;
-         headLimit = BEAR_HEAD_FRAME;
+         headLimit = RIBERY_HEAD_FRAME;
          specialText.text = String("** CLASSIC PLAYERS UNLOCKED **");
          Update();
       }

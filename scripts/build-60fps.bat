@@ -42,6 +42,25 @@ call :replace SPL_dist1_fla.score_mc_115 "%SCRIPTS%\SPL_dist1_fla\score_mc_115.a
 call :replace SPL_dist1_fla.Flasher_131 "%SCRIPTS%\SPL_dist1_fla\Flasher_131.as" || exit /b 1
 call :replace SPL_dist1_fla.AchAward_17 "%SCRIPTS%\SPL_dist1_fla\AchAward_17.as" || exit /b 1
 
+echo Injecting custom head Ribery (frame 31)...
+set WORK_XML=%ROOT%\build\_work.xml
+set WORK_ASSETS=%ROOT%\build\_work_assets\images
+%JAVA% -jar "%FFDEC%" -swf2xml -external image "%WORK%" "%WORK_XML%"
+if errorlevel 1 (
+  echo Failed to export SWF to XML for custom head.
+  exit /b 1
+)
+node "%ROOT%\scripts\inject-custom-head.js" "%WORK_XML%" "%WORK_ASSETS%" "%ROOT%\decompiled\images\901.png" 31
+if errorlevel 1 (
+  echo Failed to patch SWF XML for custom head.
+  exit /b 1
+)
+%JAVA% -jar "%FFDEC%" -xml2swf "%WORK_XML%" "%WORK%"
+if errorlevel 1 (
+  echo Failed to import SWF XML after custom head patch.
+  exit /b 1
+)
+
 echo Setting SWF frame rate to 60...
 %JAVA% -jar "%FFDEC%" -header -set framerate 60 "%WORK%" "%OUT%"
 if errorlevel 1 (

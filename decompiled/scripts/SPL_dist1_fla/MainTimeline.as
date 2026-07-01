@@ -1723,6 +1723,10 @@ package SPL_dist1_fla
          {
             return "Bear";
          }
+         if(param1 == 31)
+         {
+            return "Ribery";
+         }
          var _loc2_:int = param1 - teamList.length - 1;
          if(_loc2_ >= 0 && _loc2_ < specialsHeadList.length)
          {
