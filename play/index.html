@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Heads Football Championship</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+      color: #eee;
+    }
+    #player {
+      width: 800px;
+      height: 540px;
+      max-width: 100vw;
+      max-height: calc(100vh - 4rem);
+      border: 2px solid #333;
+      background: #000;
+    }
+    p { margin: 0.5rem; font-size: 0.9rem; opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+  <p>Sports Heads Football Championship — local SWF via Ruffle</p>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle@0.3.0/dist/ruffle.js"></script>
+  <script>
+    const container = document.getElementById("player");
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    player.style.width = "100%";
+    player.style.height = "100%";
+    container.appendChild(player);
+    player.load("../original/sports_heads_football_championship.swf");
+  </script>
+</body>
+</html>

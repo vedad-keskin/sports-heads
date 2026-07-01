@@ -1,0 +1,11 @@
+# Downloaded tool archives (extracted folders are kept locally)
+tools/*.zip
+tools/*.msi
+
+# Patched builds (track manually if needed)
+# build/*.swf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
