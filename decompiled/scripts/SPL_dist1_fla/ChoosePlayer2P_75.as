@@ -53,6 +53,10 @@ package SPL_dist1_fla
       
       public var headLimit:*;
       
+      public static const CLASSIC_HEAD_LAST:int = 28;
+      
+      public static const BEAR_HEAD_FRAME:int = 30;
+      
       public function ChoosePlayer2P_75()
       {
          super();
@@ -97,44 +101,79 @@ package SPL_dist1_fla
          Update();
       }
       
+      public function normalizeHeadSkin(param1:int) : int
+      {
+         if(param1 == BEAR_HEAD_FRAME)
+         {
+            return param1;
+         }
+         if(param1 >= 1 && param1 <= CLASSIC_HEAD_LAST)
+         {
+            return param1;
+         }
+         if(param1 == 29)
+         {
+            return CLASSIC_HEAD_LAST;
+         }
+         return 1;
+      }
+      
+      public function prevHeadSkin(param1:int) : int
+      {
+         param1 = normalizeHeadSkin(param1);
+         if(param1 == BEAR_HEAD_FRAME)
+         {
+            return CLASSIC_HEAD_LAST;
+         }
+         if(param1 <= 1)
+         {
+            return BEAR_HEAD_FRAME;
+         }
+         return param1 - 1;
+      }
+      
+      public function nextHeadSkin(param1:int) : int
+      {
+         param1 = normalizeHeadSkin(param1);
+         if(param1 == CLASSIC_HEAD_LAST)
+         {
+            return BEAR_HEAD_FRAME;
+         }
+         if(param1 == BEAR_HEAD_FRAME)
+         {
+            return 1;
+         }
+         return param1 + 1;
+      }
+      
       public function mouseRelease1(param1:Event) : *
       {
-         if(MovieClip(root).tpskin1 > 1)
-         {
-            --MovieClip(root).tpskin1;
-         }
+         MovieClip(root).tpskin1 = prevHeadSkin(MovieClip(root).tpskin1);
          Update();
       }
       
       public function mouseRelease2(param1:Event) : *
       {
-         if(MovieClip(root).tpskin1 < headLimit)
-         {
-            ++MovieClip(root).tpskin1;
-         }
+         MovieClip(root).tpskin1 = nextHeadSkin(MovieClip(root).tpskin1);
          Update();
       }
       
       public function mouseRelease3(param1:Event) : *
       {
-         if(MovieClip(root).tpskin2 > 1)
-         {
-            --MovieClip(root).tpskin2;
-         }
+         MovieClip(root).tpskin2 = prevHeadSkin(MovieClip(root).tpskin2);
          Update();
       }
       
       public function mouseRelease4(param1:Event) : *
       {
-         if(MovieClip(root).tpskin2 < headLimit)
-         {
-            ++MovieClip(root).tpskin2;
-         }
+         MovieClip(root).tpskin2 = nextHeadSkin(MovieClip(root).tpskin2);
          Update();
       }
       
       public function Update() : *
       {
+         MovieClip(root).tpskin1 = normalizeHeadSkin(MovieClip(root).tpskin1);
+         MovieClip(root).tpskin2 = normalizeHeadSkin(MovieClip(root).tpskin2);
          Head1.gotoAndStop(MovieClip(root).tpskin1);
          Head2.gotoAndStop(MovieClip(root).tpskin2);
          tpSpecialsText.text = String(MovieClip(root).tpSpecialsList[MovieClip(root).tpSpecials]);
@@ -153,13 +192,8 @@ package SPL_dist1_fla
          tpGtBut.addEventListener(MouseEvent.MOUSE_UP,tpGtButHit);
          specialsBut.addEventListener(MouseEvent.MOUSE_UP,specialsButHit);
          MovieClip(root).SPECIAL_HEADS = true;
-         headLimit = MovieClip(root).teamList.length;
-         specialText.text = String("");
-         if(MovieClip(root).SPECIAL_HEADS)
-         {
-            headLimit = 30;
-            specialText.text = String("** CLASSIC PLAYERS UNLOCKED **");
-         }
+         headLimit = BEAR_HEAD_FRAME;
+         specialText.text = String("** CLASSIC PLAYERS UNLOCKED **");
          Update();
       }
    }

@@ -1713,6 +1713,24 @@ package SPL_dist1_fla
          blueprints.removeEventListener(Event.RENDER,onRender);
       }
       
+      public function resolveHeadName(param1:int) : String
+      {
+         if(param1 >= 1 && param1 <= teamList.length)
+         {
+            return String(teamList[param1 - 1][0]);
+         }
+         if(param1 == 30)
+         {
+            return "Bear";
+         }
+         var _loc2_:int = param1 - teamList.length - 1;
+         if(_loc2_ >= 0 && _loc2_ < specialsHeadList.length)
+         {
+            return String(specialsHeadList[_loc2_]);
+         }
+         return "Player";
+      }
+      
       public function pointComp(param1:*) : *
       {
          var pointName:String = null;
@@ -2835,22 +2853,8 @@ package SPL_dist1_fla
          }
          bgPitch.groundBg.gotoAndStop(pitchSize);
          bgPitch.groundBg.cacheAsBitmap = true;
-         if(nextOpponent < teamList.length + 1)
-         {
-            teamLeftName = String(teamList[nextOpponent - 1][0]);
-         }
-         else
-         {
-            teamLeftName = specialsHeadList[nextOpponent - teamList.length - 1];
-         }
-         if(faceNum < teamList.length + 1)
-         {
-            teamRightName = String(teamList[faceNum - 1][0]);
-         }
-         else
-         {
-            teamRightName = specialsHeadList[faceNum - teamList.length - 1];
-         }
+         teamLeftName = resolveHeadName(nextOpponent);
+         teamRightName = resolveHeadName(faceNum);
          scores.teamLeft_txt.text = teamLeftName;
          scores.teamRight_txt.text = teamRightName;
          initGame();

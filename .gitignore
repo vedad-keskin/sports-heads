@@ -1,11 +1,51 @@
-# Downloaded tool archives (extracted folders are kept locally)
+# --- Original game (download from Internet Archive) ---
+original/*.swf
+/sports_heads_football_championship.swf
+*.torrent
+*.sqlite
+
+# --- Build outputs (rebuild with scripts/build-60fps.bat) ---
+build/*.swf
+build/*.xml
+build/_*/
+build/_work*
+build/_60fps_work.swf
+build/verify-*/
+build/*_check/
+
+# Keep the build folder in git
+!build/.gitkeep
+
+# --- Custom head / SWF experiments (local only) ---
+custom/
+
+# --- Tool installers (extracted folders are kept locally) ---
 tools/*.zip
 tools/*.msi
 
-# Patched builds (track manually if needed)
-# build/*.swf
+# --- Godot remake cache ---
+remake/.godot/
+remake/.import/
 
-# OS / editor
+# --- Node (if used for build scripts) ---
+node_modules/
+
+# --- OS ---
 .DS_Store
 Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# --- Editor / IDE ---
 *.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Logs & env ---
+*.log
+.env
+.env.*
