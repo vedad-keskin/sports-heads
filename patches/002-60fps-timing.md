@@ -54,4 +54,4 @@ scripts\build-60fps.bat
 - [ ] Ball physics feel equivalent
 - [ ] Score overlay fade duration matches
 
-Launch: `play\play-60fps.bat`
+Launch: `play\play.bat`

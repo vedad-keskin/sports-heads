@@ -1,63 +1,66 @@
-# Sports Heads Football Championship — Decompiled Archive
+# Sports Heads Football Championship Remastered
 
-Reverse-engineering workspace for the Flash game archived at [Internet Archive](https://archive.org/download/sports_heads_football_championship_flash).
+60 FPS remaster of the Flash game archived at [Internet Archive](https://archive.org/download/sports_heads_football_championship_flash), played through [Ruffle](https://ruffle.rs).
 
-The original Mousebreaker FLA/source was never published. This repo holds the **decompiled ActionScript** and extracted assets from the SWF, plus tooling to play and patch the game locally.
-
-## Project layout
-
-```
-sports-heads/
-├── original/          # Untouched SWF from the archive
-├── decompiled/        # FFDec export: scripts, sprites, sounds, images, …
-├── build/             # Patched SWFs (future edits via FFDec)
-├── remake/            # Godot 4 full remake (smooth FPS, delta-time timers)
-├── play/              # Launch scripts and browser player
-├── tools/             # FFDec, Ruffle (local, not committed as zips)
-└── scripts/           # Repeatable export helpers
-```
+This repo holds the **patch source**, decompiled ActionScript reference, and scripts to build and share a portable Windows release.
 
 ## Quick start — play locally
 
-**Original (unpatched):**
-
-```bat
-play\play.bat
-```
-
-**Patched (ice + jump timer fixes):**
-
-```bat
-play\play-patched.bat
-```
-
-**Patched + 60 fps (60fps_patch1 — timing, right goal, 2P defaults):**
-
-```bat
-play\play-60fps.bat
-```
-
-Or double-click `tools\ruffle\ruffle.exe` and open `build/60fps_patch1.swf` or `build/patched.swf`.
-
-Build or rebuild 60fps_patch1:
+Build the patched SWF (once):
 
 ```bat
 scripts\build-60fps.bat
 ```
 
-See [patches/002-60fps-timing.md](patches/002-60fps-timing.md) for scaling details.
-
-**Browser (no install):** open `play/index.html` in a browser (uses Ruffle from CDN).
-
-## Godot 4 remake (smooth FPS, full reimplementation)
-
-Open [`remake/project.godot`](remake/project.godot) in Godot 4.3+ and press **F5**, or:
+Play:
 
 ```bat
-godot --path remake
+play\play.bat
 ```
 
-See [`remake/README.md`](remake/README.md) for architecture, controls, and tuning.
+Or open `play/index.html` in a browser (Ruffle via CDN).
+
+## Share with friends — portable ZIP
+
+Build a self-contained folder you can zip and send:
+
+```bat
+release\build-release.bat
+```
+
+Output: `release/dist/SportsHeadsRemastered-Portable.zip`
+
+Friends extract it and double-click **Play Game.bat**. No install, Java, or dev tools required.
+
+Use local Ruffle instead of downloading the latest nightly:
+
+```bat
+release\build-release.bat -UseLocalRuffle
+```
+
+## Project layout
+
+```
+sports-heads/
+├── original/          # Untouched SWF from the archive (download once)
+├── build/             # Patched SWFs (rebuild with scripts/build-60fps.bat)
+├── decompiled/        # FFDec export: scripts, sprites, sounds, images, …
+├── patches/           # Documented patch notes
+├── play/              # Dev launch scripts and browser player
+├── release/           # Portable ZIP build scripts
+├── tools/             # FFDec, Ruffle (local, not committed as binaries)
+├── scripts/           # Build and export helpers
+└── logo.png           # Game logo
+```
+
+## Patches included in the remaster
+
+| Patch | What it fixes |
+|-------|----------------|
+| [001](patches/001-pu-timer-fixes.md) | Power-up timer bugs |
+| [002](patches/002-60fps-timing.md) | 60 FPS timing, physics, movement scaling |
+| [003](patches/003-right-goal-2p-defaults.md) | Right goal + 2P defaults |
+| Custom head | Ribery head injection in 60fps build |
 
 ## Decompile / re-export
 
@@ -73,28 +76,16 @@ Exports into `decompiled/` using [JPEXS FFDec](https://github.com/jindrapetrik/j
 
 | Layer | Details |
 |-------|---------|
-| Runtime | Flash 9, ActionScript 3 |
+| Runtime | Flash 9, ActionScript 3 via Ruffle |
 | Physics | Box2D (`decompiled/scripts/Box2D/`) |
 | Document root | `SPL_dist1_fla.MainTimeline` |
 | Input | `KeyPoll` (keyboard bitmap on stage) |
 | Save data | `SharedObject` (local Flash storage) |
-| External calls | High-score POST to mousebreaker.com (optional; game works offline) |
 
 See [decompiled/ARCHITECTURE.md](decompiled/ARCHITECTURE.md) for class map and patch workflow.
 
-## Patching bugs (future)
-
-1. Open `original/sports_heads_football_championship.swf` in FFDec (`tools\ffdec\ffdec.bat`).
-2. Edit ActionScript or P-code in the SWF (do not rely on recompiling exported `.as` files).
-3. **File → Save as** → `build/patched.swf`.
-4. Test with Ruffle and/or Adobe Flash Player standalone projector.
-
-## Legal
-
-Sports Heads is © Mousebreaker. Decompilation here is for personal preservation and learning. Do not redistribute modified SWFs or extracted assets without permission.
-
-## Tool versions (installed locally)
+## Tool versions (dev machine)
 
 - Java: Eclipse Temurin 17
 - FFDec: 26.2.1
-- Ruffle: 0.3.0
+- Ruffle: latest nightly (downloaded by `release/build-release.ps1`)

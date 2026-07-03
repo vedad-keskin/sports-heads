@@ -61,4 +61,4 @@ scripts\build-60fps.bat
 - [ ] 2 Player menu shows P1 frame 7, P2 frame 3, clear pitch, first to seven
 - [ ] Match uses first-to-7 scoring (no 60s timer)
 
-Launch: `play\play-60fps.bat`
+Launch: `play\play.bat`

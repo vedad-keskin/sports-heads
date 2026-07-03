@@ -23,9 +23,14 @@ custom/
 tools/*.zip
 tools/*.msi
 
-# --- Godot remake cache ---
-remake/.godot/
-remake/.import/
+# --- Release build output ---
+release/staging/
+release/dist/
+release/ruffle-download/
+
+# --- Ruffle binary (download locally or via release script) ---
+tools/ruffle/ruffle.exe
+tools/ruffle/*.dll
 
 # --- Node (if used for build scripts) ---
 node_modules/
